@@ -17,10 +17,10 @@
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
         <span class="inline-block px-4 py-1.5 bg-blue-600/20 text-blue-400 text-xs font-bold rounded-full border border-blue-600/30 mb-6 uppercase tracking-widest">Digital Excellence</span>
         <h1 class="text-4xl md:text-7xl font-bold text-white mb-8 leading-tight">
-            Pusat Inovasi & <br> <span class="text-blue-500">Riset Teknologi</span>
+            Laboratorium Komputer <br> <span class="text-blue-500 text-3xl md:text-5xl">Jurusan Komputer dan Bisnis</span>
         </h1>
         <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-            Selamat datang di portal resmi Laboratorium Komputer. Kami menyediakan fasilitas modern dan ekosistem riset untuk mendukung kemajuan teknologi informasi.
+            Selamat datang di portal resmi Laboratorium Komputer. Kami menyediakan fasilitas modern dan ekosistem riset untuk mendukung kemajuan teknologi informasi di Jurusan Komputer dan Bisnis.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="{{ route('berita.index') }}" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">Jelajahi Kegiatan</a>

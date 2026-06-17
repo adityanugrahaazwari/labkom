@@ -16,6 +16,7 @@ Route::prefix('profil')->name('profil.')->group(function () {
 
 Route::prefix('fasilitas')->name('fasilitas.')->group(function () {
     Route::get('/laboratorium', [PublicController::class, 'laboratorium'])->name('laboratorium');
+    Route::get('/laboratorium/{slug}', [PublicController::class, 'laboratoriumDetail'])->name('show');
 });
 
 Route::prefix('berita')->name('berita.')->group(function () {

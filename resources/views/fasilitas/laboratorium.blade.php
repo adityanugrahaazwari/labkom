@@ -29,7 +29,7 @@
             </div>
             <h3 class="text-xl font-bold mb-3">{{ $lab['name'] }}</h3>
             <p class="text-slate-600 leading-relaxed mb-6">{{ $lab['desc'] }}</p>
-            <a href="#" class="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:gap-3 transition-all">
+            <a href="{{ route('fasilitas.show', Str::slug($lab['name'])) }}" class="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:gap-3 transition-all">
                 Lihat Detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
         </div>

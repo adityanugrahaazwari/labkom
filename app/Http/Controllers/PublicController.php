@@ -26,6 +26,11 @@ class PublicController extends Controller
         return view('fasilitas.laboratorium');
     }
 
+    public function laboratoriumDetail($slug)
+    {
+        return view('fasilitas.show', compact('slug'));
+    }
+
     public function berita()
     {
         return view('berita.index');

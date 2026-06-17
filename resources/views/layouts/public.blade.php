@@ -19,41 +19,65 @@
         <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
             <nav class="container mx-auto px-4 lg:px-8 flex items-center justify-between h-20">
                 <!-- Logo -->
-                <a href="/" class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">L</div>
+                <a href="{{ route('home') }}" class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-600/20">L</div>
                     <div class="flex flex-col">
-                        <span class="font-bold text-lg leading-tight">LABKOM</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-wider">Pusat Informasi Digital</span>
+                        <span class="font-bold text-lg leading-tight tracking-tight text-slate-900">Laboratorium Komputer</span>
+                        <span class="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">Jurusan Komputer dan Bisnis</span>
                     </div>
                 </a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-medium hover:text-blue-600 transition">Beranda</a>
+                    <a href="{{ route('home') }}" 
+                       class="text-sm font-bold transition {{ request()->routeIs('home') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">Beranda</a>
                     
                     <!-- Profil Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button class="text-sm font-medium hover:text-blue-600 transition flex items-center gap-1">
-                            Profil <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <button class="text-sm font-bold transition flex items-center gap-1 {{ request()->routeIs('profil.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}" :class="open ? 'text-blue-600' : ''">
+                            Profil <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div x-show="open" x-cloak class="absolute left-0 mt-2 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
-                            <a href="{{ route('profil.visi-misi') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Visi & Misi</a>
-                            <a href="{{ route('profil.struktur-organisasi') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Struktur Organisasi</a>
+                        <div x-show="open" class="absolute h-4 w-full top-full"></div> <!-- Bridge to prevent closing on gap hover -->
+                        <div x-show="open" 
+                             x-cloak 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-1"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-1"
+                             class="absolute left-0 mt-4 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
+                            <a href="{{ route('profil.visi-misi') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.visi-misi') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Visi & Misi</a>   
+                            <a href="{{ route('profil.struktur-organisasi') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.struktur-organisasi') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Struktur Organisasi</a>
                         </div>
                     </div>
 
                     <!-- Fasilitas Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button class="text-sm font-medium hover:text-blue-600 transition flex items-center gap-1">
-                            Fasilitas <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <button class="text-sm font-bold transition flex items-center gap-1 {{ request()->routeIs('fasilitas.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}" :class="open ? 'text-blue-600' : ''">
+                            Fasilitas <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div x-show="open" x-cloak class="absolute left-0 mt-2 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
-                            <a href="{{ route('fasilitas.laboratorium') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Laboratorium</a>
+                        <div x-show="open" class="absolute h-4 w-full top-full"></div> <!-- Bridge to prevent closing on gap hover -->
+                        <div x-show="open" 
+                             x-cloak 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-1"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-1"
+                             class="absolute left-0 mt-4 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
+                            <a href="{{ route('fasilitas.laboratorium') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('fasilitas.laboratorium') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Laboratorium</a>
                         </div>
                     </div>
 
-                    <a href="{{ route('berita.index') }}" class="text-sm font-medium hover:text-blue-600 transition">Berita</a>
-                    <a href="{{ route('unduhan.index') }}" class="text-sm font-medium hover:text-blue-600 transition">Unduhan</a>
+                    <a href="{{ route('berita.index') }}" 
+                       class="text-sm font-bold transition {{ request()->routeIs('berita.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">Berita</a>
+                    <a href="{{ route('unduhan.index') }}" 
+                       class="text-sm font-bold transition {{ request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">Unduhan</a>
                     <a href="#" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-full hover:bg-blue-700 transition shadow-sm">Portal Akademik</a>
                 </div>
 
@@ -66,26 +90,34 @@
             <!-- Mobile Menu -->
             <div x-show="mobileMenuOpen" x-cloak class="lg:hidden bg-white border-t border-slate-100 p-4 shadow-lg absolute inset-x-0">
                 <div class="flex flex-col gap-4">
-                    <a href="{{ route('home') }}" class="font-medium text-slate-700">Beranda</a>
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="w-full flex justify-between items-center font-medium text-slate-700">
+                    <a href="{{ route('home') }}" 
+                       class="font-bold {{ request()->routeIs('home') ? 'text-blue-600' : 'text-slate-700' }}">Beranda</a>
+                    <div x-data="{ open: {{ request()->routeIs('profil.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" 
+                                class="w-full flex justify-between items-center font-bold {{ request()->routeIs('profil.*') ? 'text-blue-600' : 'text-slate-700' }}">
                             Profil <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
-                            <a href="{{ route('profil.visi-misi') }}" class="text-slate-600 text-sm">Visi & Misi</a>
-                            <a href="{{ route('profil.struktur-organisasi') }}" class="text-slate-600 text-sm">Struktur Organisasi</a>
+                            <a href="{{ route('profil.visi-misi') }}" 
+                               class="text-sm {{ request()->routeIs('profil.visi-misi') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Visi & Misi</a>
+                            <a href="{{ route('profil.struktur-organisasi') }}" 
+                               class="text-sm {{ request()->routeIs('profil.struktur-organisasi') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Struktur Organisasi</a>
                         </div>
                     </div>
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="w-full flex justify-between items-center font-medium text-slate-700">
+                    <div x-data="{ open: {{ request()->routeIs('fasilitas.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" 
+                                class="w-full flex justify-between items-center font-bold {{ request()->routeIs('fasilitas.*') ? 'text-blue-600' : 'text-slate-700' }}">
                             Fasilitas <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
-                            <a href="{{ route('fasilitas.laboratorium') }}" class="text-slate-600 text-sm">Laboratorium</a>
+                            <a href="{{ route('fasilitas.laboratorium') }}" 
+                               class="text-sm {{ request()->routeIs('fasilitas.laboratorium') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Laboratorium</a>
                         </div>
                     </div>
-                    <a href="{{ route('berita.index') }}" class="font-medium text-slate-700">Berita</a>
-                    <a href="{{ route('unduhan.index') }}" class="font-medium text-slate-700">Unduhan</a>
+                    <a href="{{ route('berita.index') }}" 
+                       class="font-bold {{ request()->routeIs('berita.*') ? 'text-blue-600' : 'text-slate-700' }}">Berita</a>
+                    <a href="{{ route('unduhan.index') }}" 
+                       class="font-bold {{ request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-700' }}">Unduhan</a>
                     <a href="#" class="w-full py-3 bg-blue-600 text-white text-center font-bold rounded-xl">Portal Akademik</a>
                 </div>
             </div>
