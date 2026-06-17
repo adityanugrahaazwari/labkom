@@ -29,21 +29,31 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center gap-8">
-                    <a href="/" class="text-sm font-medium hover:text-blue-600 transition">Beranda</a>
+                    <a href="{{ route('home') }}" class="text-sm font-medium hover:text-blue-600 transition">Beranda</a>
+                    
+                    <!-- Profil Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                         <button class="text-sm font-medium hover:text-blue-600 transition flex items-center gap-1">
                             Profil <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div x-show="open" x-cloak class="absolute left-0 mt-2 w-48 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
-                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Sejarah</a>
-                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Visi & Misi</a>
-                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Struktur Organisasi</a>
-                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">SDM</a>
+                        <div x-show="open" x-cloak class="absolute left-0 mt-2 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
+                            <a href="{{ route('profil.visi-misi') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Visi & Misi</a>
+                            <a href="{{ route('profil.struktur-organisasi') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Struktur Organisasi</a>
                         </div>
                     </div>
-                    <a href="#" class="text-sm font-medium hover:text-blue-600 transition">Fasilitas</a>
-                    <a href="#" class="text-sm font-medium hover:text-blue-600 transition">Berita</a>
-                    <a href="#" class="text-sm font-medium hover:text-blue-600 transition">Download Center</a>
+
+                    <!-- Fasilitas Dropdown -->
+                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="text-sm font-medium hover:text-blue-600 transition flex items-center gap-1">
+                            Fasilitas <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-cloak class="absolute left-0 mt-2 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
+                            <a href="{{ route('fasilitas.laboratorium') }}" class="block px-4 py-2 text-sm hover:bg-slate-50 transition">Laboratorium</a>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('berita.index') }}" class="text-sm font-medium hover:text-blue-600 transition">Berita</a>
+                    <a href="{{ route('unduhan.index') }}" class="text-sm font-medium hover:text-blue-600 transition">Unduhan</a>
                     <a href="#" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-full hover:bg-blue-700 transition shadow-sm">Portal Akademik</a>
                 </div>
 
@@ -56,11 +66,26 @@
             <!-- Mobile Menu -->
             <div x-show="mobileMenuOpen" x-cloak class="lg:hidden bg-white border-t border-slate-100 p-4 shadow-lg absolute inset-x-0">
                 <div class="flex flex-col gap-4">
-                    <a href="/" class="font-medium text-slate-700">Beranda</a>
-                    <a href="#" class="font-medium text-slate-700">Profil</a>
-                    <a href="#" class="font-medium text-slate-700">Fasilitas</a>
-                    <a href="#" class="font-medium text-slate-700">Berita</a>
-                    <a href="#" class="font-medium text-slate-700">Download Center</a>
+                    <a href="{{ route('home') }}" class="font-medium text-slate-700">Beranda</a>
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="w-full flex justify-between items-center font-medium text-slate-700">
+                            Profil <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
+                            <a href="{{ route('profil.visi-misi') }}" class="text-slate-600 text-sm">Visi & Misi</a>
+                            <a href="{{ route('profil.struktur-organisasi') }}" class="text-slate-600 text-sm">Struktur Organisasi</a>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="w-full flex justify-between items-center font-medium text-slate-700">
+                            Fasilitas <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
+                            <a href="{{ route('fasilitas.laboratorium') }}" class="text-slate-600 text-sm">Laboratorium</a>
+                        </div>
+                    </div>
+                    <a href="{{ route('berita.index') }}" class="font-medium text-slate-700">Berita</a>
+                    <a href="{{ route('unduhan.index') }}" class="font-medium text-slate-700">Unduhan</a>
                     <a href="#" class="w-full py-3 bg-blue-600 text-white text-center font-bold rounded-xl">Portal Akademik</a>
                 </div>
             </div>
@@ -87,21 +112,16 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-6">Tautan Cepat</h4>
+                    <h4 class="font-bold text-white mb-6">Profil</h4>
                     <ul class="flex flex-col gap-3 text-sm">
-                        <li><a href="#" class="hover:text-blue-400 transition">Sejarah Lab</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">Struktur Organisasi</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">Daftar Fasilitas</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">Arsip Pengumuman</a></li>
+                        <li><a href="{{ route('profil.visi-misi') }}" class="hover:text-blue-400 transition">Visi & Misi</a></li>
+                        <li><a href="{{ route('profil.struktur-organisasi') }}" class="hover:text-blue-400 transition">Struktur Organisasi</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-6">Layanan</h4>
+                    <h4 class="font-bold text-white mb-6">Fasilitas</h4>
                     <ul class="flex flex-col gap-3 text-sm">
-                        <li><a href="#" class="hover:text-blue-400 transition">Peminjaman Lab</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">Modul Praktikum</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">E-Certificate</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition">FAQ</a></li>
+                        <li><a href="{{ route('fasilitas.laboratorium') }}" class="hover:text-blue-400 transition">Laboratorium</a></li>
                     </ul>
                 </div>
                 <div>
