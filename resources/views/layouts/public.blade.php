@@ -74,10 +74,32 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('berita.index') }}" 
-                       class="text-sm font-bold transition {{ request()->routeIs('berita.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">Berita</a>
-                    <a href="{{ route('unduhan.index') }}" 
-                       class="text-sm font-bold transition {{ request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">Unduhan</a>
+                    <!-- Publikasi Dropdown -->
+                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="text-sm font-bold transition flex items-center gap-1 {{ request()->routeIs('berita.*') || request()->routeIs('agenda.*') || request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}" :class="open ? 'text-blue-600' : ''">
+                            Publikasi <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" class="absolute h-4 w-full top-full"></div> <!-- Bridge to prevent closing on gap hover -->
+                        <div x-show="open" 
+                             x-cloak 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-1"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-1"
+                             class="absolute left-0 mt-4 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
+                            <a href="{{ route('berita.index') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('berita.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Berita</a>
+                            <a href="{{ route('agenda.index') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('agenda.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Agenda</a>
+                            <a href="{{ route('unduhan.index') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('unduhan.*') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Unduhan</a>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('faq') }}" 
+                       class="text-sm font-bold transition {{ request()->routeIs('faq') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">FAQ</a>
                     <a href="#" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-full hover:bg-blue-700 transition shadow-sm">Portal Akademik</a>
                 </div>
 
@@ -114,10 +136,22 @@
                                class="text-sm {{ request()->routeIs('fasilitas.laboratorium') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Laboratorium</a>
                         </div>
                     </div>
-                    <a href="{{ route('berita.index') }}" 
-                       class="font-bold {{ request()->routeIs('berita.*') ? 'text-blue-600' : 'text-slate-700' }}">Berita</a>
-                    <a href="{{ route('unduhan.index') }}" 
-                       class="font-bold {{ request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-700' }}">Unduhan</a>
+                    <div x-data="{ open: {{ request()->routeIs('berita.*') || request()->routeIs('agenda.*') || request()->routeIs('unduhan.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" 
+                                class="w-full flex justify-between items-center font-bold {{ request()->routeIs('berita.*') || request()->routeIs('agenda.*') || request()->routeIs('unduhan.*') ? 'text-blue-600' : 'text-slate-700' }}">
+                            Publikasi <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
+                            <a href="{{ route('berita.index') }}" 
+                               class="text-sm {{ request()->routeIs('berita.*') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Berita</a>
+                            <a href="{{ route('agenda.index') }}" 
+                               class="text-sm {{ request()->routeIs('agenda.*') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Agenda</a>
+                            <a href="{{ route('unduhan.index') }}" 
+                               class="text-sm {{ request()->routeIs('unduhan.*') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Unduhan</a>
+                        </div>
+                    </div>
+                    <a href="{{ route('faq') }}" 
+                       class="font-bold {{ request()->routeIs('faq') ? 'text-blue-600' : 'text-slate-700' }}">FAQ</a>
                     <a href="#" class="w-full py-3 bg-blue-600 text-white text-center font-bold rounded-xl">Portal Akademik</a>
                 </div>
             </div>
@@ -160,9 +194,12 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-6">Fasilitas</h4>
+                    <h4 class="font-bold text-white mb-6">Fasilitas & Informasi</h4>
                     <ul class="flex flex-col gap-3 text-sm">
                         <li><a href="{{ route('fasilitas.laboratorium') }}" class="hover:text-blue-400 transition">Laboratorium</a></li>
+                        <li><a href="{{ route('agenda.index') }}" class="hover:text-blue-400 transition">Agenda Kegiatan</a></li>
+                        <li><a href="{{ route('unduhan.index') }}" class="hover:text-blue-400 transition">Unduhan Dokumen</a></li>
+                        <li><a href="{{ route('faq') }}" class="hover:text-blue-400 transition">Tanya Jawab (FAQ)</a></li>
                     </ul>
                 </div>
                 <div>

@@ -10,10 +10,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <style>
         [x-cloak] { display: none !important; }
+        /* Custom subtle scrollbar for sidebar navigation */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.15);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.3);
+        }
     </style>
 </head>
-<body class="font-sans antialiased bg-slate-100 text-slate-900">
-    <div x-data="{ sidebarOpen: true }" class="flex min-h-screen">
+<body class="font-sans antialiased bg-slate-100 text-slate-900 h-screen overflow-hidden">
+    <div x-data="{ sidebarOpen: true }" class="flex h-screen overflow-hidden w-full">
         <!-- Sidebar -->
         <aside 
             :class="sidebarOpen ? 'w-64' : 'w-20'" 
@@ -135,7 +149,7 @@
         </aside>
 
         <!-- Main Content Wrapper -->
-        <div class="flex-1 flex flex-col min-w-0">
+        <div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
             <!-- Topbar -->
             <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0">
                 <button @click="sidebarOpen = !sidebarOpen" class="p-2 hover:bg-slate-50 rounded-lg transition text-slate-500">

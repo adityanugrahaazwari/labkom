@@ -114,6 +114,7 @@ class MenuSeeder extends Seeder
             'parent_id' => $publikasi->id,
             'name' => 'Agenda Kegiatan',
             'url' => '/agenda',
+            'route_name' => 'agenda.index',
             'order' => 3,
             'position' => 'header',
         ]);
@@ -139,10 +140,12 @@ class MenuSeeder extends Seeder
         Menu::create([
             'name' => 'FAQ',
             'url' => '/faq',
+            'route_name' => 'faq',
             'order' => 7,
             'position' => 'header',
         ]);
 
+        // ============================================
         // ============================================
         // 2. SEED ADMIN SIDEBAR MENUS (position = 'sidebar')
         // ============================================
@@ -157,115 +160,151 @@ class MenuSeeder extends Seeder
             'position' => 'sidebar',
         ]);
 
-        // Manajemen Halaman
-        Menu::create([
-            'name' => 'Manajemen Halaman',
-            'url' => '/admin/pages',
+        // 1. Manajemen Konten Group
+        $contentGroup = Menu::create([
+            'name' => 'Manajemen Konten',
+            'url' => '#',
             'icon' => 'document-text',
             'order' => 2,
+            'position' => 'sidebar',
+        ]);
+
+        Menu::create([
+            'parent_id' => $contentGroup->id,
+            'name' => 'Halaman Statis',
+            'url' => '/admin/pages',
+            'order' => 1,
             'position' => 'sidebar',
             'permission_id' => $managePages?->id,
         ]);
 
-        // Manajemen Berita & Pengumuman (Parent)
-        $adminPublikasi = Menu::create([
-            'name' => 'Publikasi',
-            'url' => '#',
-            'icon' => 'newspaper',
+        Menu::create([
+            'parent_id' => $contentGroup->id,
+            'name' => 'Kategori Berita',
+            'url' => '/admin/berita-kategori',
+            'route_name' => 'admin.berita-kategori.index',
+            'order' => 2,
+            'position' => 'sidebar',
+            'permission_id' => $manageBerita?->id,
+        ]);
+
+        Menu::create([
+            'parent_id' => $contentGroup->id,
+            'name' => 'Berita',
+            'url' => '/admin/berita',
+            'route_name' => 'admin.berita.index',
             'order' => 3,
             'position' => 'sidebar',
             'permission_id' => $manageBerita?->id,
         ]);
 
         Menu::create([
-            'parent_id' => $adminPublikasi->id,
-            'name' => 'Berita',
-            'url' => '/admin/berita',
-            'order' => 1,
-            'position' => 'sidebar',
-            'permission_id' => $manageBerita?->id,
-        ]);
-
-        Menu::create([
-            'parent_id' => $adminPublikasi->id,
+            'parent_id' => $contentGroup->id,
             'name' => 'Pengumuman',
             'url' => '/admin/pengumuman',
-            'order' => 2,
+            'order' => 4,
             'position' => 'sidebar',
             'permission_id' => $managePengumuman?->id,
         ]);
 
         Menu::create([
-            'parent_id' => $adminPublikasi->id,
+            'parent_id' => $contentGroup->id,
             'name' => 'Agenda',
             'url' => '/admin/agenda',
-            'order' => 3,
+            'route_name' => 'admin.agenda.index',
+            'order' => 5,
             'position' => 'sidebar',
             'permission_id' => $manageAgenda?->id,
         ]);
 
-        // Manajemen Galeri
         Menu::create([
-            'name' => 'Galeri & Media',
-            'url' => '/admin/media',
-            'icon' => 'photograph',
-            'order' => 4,
-            'position' => 'sidebar',
-            'permission_id' => $manageMedia?->id,
-        ]);
-
-        // Manajemen Profil & SDM
-        Menu::create([
-            'name' => 'Profil & SDM',
-            'url' => '/admin/profil',
-            'icon' => 'user-group',
-            'order' => 5,
-            'position' => 'sidebar',
-            'permission_id' => $manageProfiles?->id,
-        ]);
-
-        // Manajemen Fasilitas
-        Menu::create([
-            'name' => 'Fasilitas Lab',
-            'url' => '/admin/facilities',
-            'icon' => 'office-building',
-            'order' => 6,
-            'position' => 'sidebar',
-            'permission_id' => $manageFacilities?->id,
-        ]);
-
-        // Manajemen Dokumen
-        Menu::create([
-            'name' => 'Manajemen Dokumen',
-            'url' => '/admin/documents',
-            'icon' => 'folder-open',
-            'order' => 7,
-            'position' => 'sidebar',
-            'permission_id' => $manageDocuments?->id,
-        ]);
-
-        // Manajemen FAQ
-        Menu::create([
-            'name' => 'Manajemen FAQ',
+            'parent_id' => $contentGroup->id,
+            'name' => 'FAQ',
             'url' => '/admin/faq',
-            'icon' => 'question-mark-circle',
-            'order' => 8,
+            'route_name' => 'admin.faq.index',
+            'order' => 6,
             'position' => 'sidebar',
             'permission_id' => $manageFaq?->id,
         ]);
 
-        // User & Role Management (Parent)
-        $adminUsers = Menu::create([
-            'name' => 'Akses & Pengguna',
+        // 2. Profil & Fasilitas Group
+        $profileGroup = Menu::create([
+            'name' => 'Profil & Fasilitas',
             'url' => '#',
-            'icon' => 'users',
-            'order' => 9,
+            'icon' => 'user-group',
+            'order' => 3,
             'position' => 'sidebar',
-            'permission_id' => $manageUsers?->id,
         ]);
 
         Menu::create([
-            'parent_id' => $adminUsers->id,
+            'parent_id' => $profileGroup->id,
+            'name' => 'Visi & Misi',
+            'url' => '/admin/visi-misi',
+            'route_name' => 'admin.visi-misi.edit',
+            'order' => 1,
+            'position' => 'sidebar',
+            'permission_id' => $manageProfiles?->id,
+        ]);
+
+        Menu::create([
+            'parent_id' => $profileGroup->id,
+            'name' => 'Struktur Organisasi',
+            'url' => '/admin/struktur-organisasi',
+            'route_name' => 'admin.struktur-organisasi.index',
+            'order' => 2,
+            'position' => 'sidebar',
+            'permission_id' => $manageProfiles?->id,
+        ]);
+
+        Menu::create([
+            'parent_id' => $profileGroup->id,
+            'name' => 'Fasilitas Lab',
+            'url' => '/admin/facilities',
+            'route_name' => 'admin.facilities.index',
+            'order' => 3,
+            'position' => 'sidebar',
+            'permission_id' => $manageFacilities?->id,
+        ]);
+
+        // 3. Media & Berkas Group
+        $mediaGroup = Menu::create([
+            'name' => 'Media & Berkas',
+            'url' => '#',
+            'icon' => 'folder-open',
+            'order' => 4,
+            'position' => 'sidebar',
+        ]);
+
+        Menu::create([
+            'parent_id' => $mediaGroup->id,
+            'name' => 'Galeri & Media',
+            'url' => '/admin/media',
+            'order' => 1,
+            'position' => 'sidebar',
+            'permission_id' => $manageMedia?->id,
+        ]);
+
+        Menu::create([
+            'parent_id' => $mediaGroup->id,
+            'name' => 'Manajemen Dokumen',
+            'url' => '/admin/documents',
+            'route_name' => 'admin.documents.index',
+            'order' => 2,
+            'position' => 'sidebar',
+            'permission_id' => $manageDocuments?->id,
+        ]);
+
+        // 4. Akses & Pengguna Group
+        $usersGroup = Menu::create([
+            'name' => 'Akses & Pengguna',
+            'url' => '#',
+            'icon' => 'users',
+            'order' => 5,
+            'position' => 'sidebar',
+        ]);
+
+        Menu::create([
+            'parent_id' => $usersGroup->id,
             'name' => 'Data Pengguna',
             'url' => '/admin/users',
             'order' => 1,
@@ -274,7 +313,7 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'parent_id' => $adminUsers->id,
+            'parent_id' => $usersGroup->id,
             'name' => 'Peran (Role)',
             'url' => '/admin/roles',
             'order' => 2,
@@ -283,7 +322,7 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'parent_id' => $adminUsers->id,
+            'parent_id' => $usersGroup->id,
             'name' => 'Hak Akses (Permission)',
             'url' => '/admin/permissions',
             'order' => 3,
@@ -291,18 +330,17 @@ class MenuSeeder extends Seeder
             'permission_id' => $manageRoles?->id,
         ]);
 
-        // Pengaturan Sistem (Parent)
-        $adminSystem = Menu::create([
+        // 5. Pengaturan Sistem Group
+        $systemGroup = Menu::create([
             'name' => 'Pengaturan',
             'url' => '#',
             'icon' => 'cog',
-            'order' => 10,
+            'order' => 6,
             'position' => 'sidebar',
-            'permission_id' => $manageSettings?->id,
         ]);
 
         Menu::create([
-            'parent_id' => $adminSystem->id,
+            'parent_id' => $systemGroup->id,
             'name' => 'Menu Navigasi',
             'url' => '/admin/menus',
             'order' => 1,
@@ -311,7 +349,7 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'parent_id' => $adminSystem->id,
+            'parent_id' => $systemGroup->id,
             'name' => 'Identitas Web',
             'url' => '/admin/settings',
             'order' => 2,
