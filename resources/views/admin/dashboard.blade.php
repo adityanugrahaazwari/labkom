@@ -174,4 +174,105 @@
             </div>
         </div>
     </div>
+
+    <!-- New Section Row: Popular Downloads, Active Agendas & System Environment Info -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+        <!-- Popular Downloads (lg:col-span-2) -->
+        <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                    <h3 class="font-bold text-slate-900">Unduhan Terpopuler</h3>
+                    <a href="{{ route('admin.documents.index') }}" class="text-xs font-bold text-blue-600 hover:underline">Kelola Dokumen</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                <th class="px-6 py-4">Nama Dokumen</th>
+                                <th class="px-6 py-4">Ukuran</th>
+                                <th class="px-6 py-4 w-32 text-center">Total Unduhan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            @forelse ($popularDocuments as $doc)
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="px-6 py-4">
+                                    <p class="text-sm font-bold text-slate-900 line-clamp-1" title="{{ $doc->title }}">{{ $doc->title }}</p>
+                                    <p class="text-[10px] text-slate-400 truncate max-w-sm">{{ $doc->description }}</p>
+                                </td>
+                                <td class="px-6 py-4 text-xs font-semibold text-slate-600 font-mono">
+                                    {{ $doc->file_size }}
+                                </td>
+                                <td class="px-6 py-4 text-center font-bold text-blue-600 font-mono">
+                                    {{ $doc->download_count }}
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="px-6 py-8 text-center text-slate-400">
+                                    Belum ada dokumen terunggah.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Environment Info & Active Agendas (lg:col-span-1) -->
+        <div class="space-y-8">
+            <!-- Active Agendas timeline -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+                <h3 class="font-bold text-slate-900 mb-6">Agenda Kegiatan Terjadwal</h3>
+                <div class="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                    @forelse ($activeAgendas as $agenda)
+                    <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition flex gap-3">
+                        <div class="bg-blue-600 text-white rounded-xl p-2 shadow flex flex-col items-center shrink-0 min-w-[48px] text-center max-h-[56px] font-sans">
+                            <span class="text-[9px] font-bold uppercase tracking-wider leading-none">{{ $agenda->event_date->format('M') }}</span>
+                            <span class="text-lg font-black leading-none mt-0.5">{{ $agenda->event_date->format('d') }}</span>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-800 truncate" title="{{ $agenda->title }}">
+                                <a href="{{ route('admin.agenda.edit', $agenda) }}" class="hover:text-blue-600 transition">{{ $agenda->title }}</a>
+                            </h4>
+                            <p class="text-[10px] text-slate-500 mt-1 truncate">Ruang: {{ $agenda->location }}</p>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="text-center py-6 text-slate-400 text-xs">
+                        Belum ada agenda kegiatan terdaftar.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- Server Info Card -->
+            <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-6">Informasi Lingkungan Sistem</h3>
+                <div class="space-y-3 font-mono text-[11px] text-slate-600">
+                    <div class="flex justify-between">
+                        <span>Laravel Version:</span>
+                        <span class="font-semibold text-slate-900">{{ $systemInfo['laravel_version'] }}</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200/60 pt-2.5">
+                        <span>PHP Version:</span>
+                        <span class="font-semibold text-slate-900">{{ $systemInfo['php_version'] }}</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200/60 pt-2.5">
+                        <span>DB Driver:</span>
+                        <span class="font-semibold text-slate-900">{{ $systemInfo['db_driver'] }}</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200/60 pt-2.5">
+                        <span>Environment:</span>
+                        <span class="font-semibold text-slate-900">{{ $systemInfo['app_env'] }}</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200/60 pt-2.5">
+                        <span>Debug Mode:</span>
+                        <span class="font-semibold text-slate-900">{{ $systemInfo['debug_mode'] }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -28,6 +28,23 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $popularDocuments = \App\Models\Document::orderBy('download_count', 'desc')
+            ->take(5)
+            ->get();
+
+        $activeAgendas = \App\Models\Agenda::where('status', true)
+            ->orderBy('event_date', 'asc')
+            ->take(5)
+            ->get();
+
+        $systemInfo = [
+            'laravel_version' => app()->version(),
+            'php_version' => PHP_VERSION,
+            'db_driver' => config('database.default'),
+            'app_env' => config('app.env'),
+            'debug_mode' => config('app.debug') ? 'Enabled' : 'Disabled',
+        ];
+
         return view('admin.dashboard', compact(
             'totalNews',
             'totalAgenda',
@@ -38,7 +55,10 @@ class DashboardController extends Controller
             'totalDownloads',
             'totalNewsViews',
             'recentLogs',
-            'recentNews'
+            'recentNews',
+            'popularDocuments',
+            'activeAgendas',
+            'systemInfo'
         ));
     }
 }
