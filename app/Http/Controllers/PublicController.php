@@ -18,8 +18,9 @@ class PublicController extends Controller
             ->orderBy('event_date', 'desc')
             ->take(3)
             ->get();
+        $faqs = \App\Models\Faq::where('is_active', true)->orderBy('order')->orderBy('id')->get();
 
-        return view('welcome', compact('settings', 'latestNews', 'upcomingAgendas'));
+        return view('welcome', compact('settings', 'latestNews', 'upcomingAgendas', 'faqs'));
     }
 
     public function visiMisi()

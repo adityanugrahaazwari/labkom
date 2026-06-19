@@ -98,8 +98,6 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('faq') }}" 
-                       class="text-sm font-bold transition {{ request()->routeIs('faq') ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600' }}">FAQ</a>
                     <a href="#" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-full hover:bg-blue-700 transition shadow-sm">Portal Akademik</a>
                 </div>
 
@@ -150,8 +148,6 @@
                                class="text-sm {{ request()->routeIs('unduhan.*') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Unduhan</a>
                         </div>
                     </div>
-                    <a href="{{ route('faq') }}" 
-                       class="font-bold {{ request()->routeIs('faq') ? 'text-blue-600' : 'text-slate-700' }}">FAQ</a>
                     <a href="#" class="w-full py-3 bg-blue-600 text-white text-center font-bold rounded-xl">Portal Akademik</a>
                 </div>
             </div>
@@ -199,7 +195,7 @@
                         <li><a href="{{ route('fasilitas.laboratorium') }}" class="hover:text-blue-400 transition">Laboratorium</a></li>
                         <li><a href="{{ route('agenda.index') }}" class="hover:text-blue-400 transition">Agenda Kegiatan</a></li>
                         <li><a href="{{ route('unduhan.index') }}" class="hover:text-blue-400 transition">Unduhan Dokumen</a></li>
-                        <li><a href="{{ route('faq') }}" class="hover:text-blue-400 transition">Tanya Jawab (FAQ)</a></li>
+                        <li><a href="{{ route('home') }}#faq" class="hover:text-blue-400 transition">Tanya Jawab (FAQ)</a></li>
                     </ul>
                 </div>
                 <div>

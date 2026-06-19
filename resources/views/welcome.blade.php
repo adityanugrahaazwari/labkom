@@ -201,6 +201,53 @@
     </div>
 </section>
 
+<!-- FAQ Section -->
+<section id="faq" class="py-32 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <span class="text-blue-600 text-xs font-bold uppercase tracking-widest block mb-3">Tanya Jawab</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+            <p class="text-slate-500 mt-4 text-base">Cari jawaban cepat untuk pertanyaan umum mengenai praktikum, peminjaman alat, jam operasional, dan informasi penting lainnya.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-6" x-data="{ activeFaq: null }">
+            @forelse($faqs as $faq)
+                <div class="bg-slate-50 rounded-2xl border border-slate-100/80 shadow-sm overflow-hidden hover:shadow transition duration-300">
+                    <button 
+                        @click="activeFaq = (activeFaq === {{ $faq->id }} ? null : {{ $faq->id }})"
+                        class="w-full text-left px-8 py-5 font-bold text-slate-800 hover:text-blue-600 flex items-center justify-between transition focus:outline-none"
+                    >
+                        <span class="text-sm md:text-base leading-snug">{{ $faq->question }}</span>
+                        <svg 
+                            :class="activeFaq === {{ $faq->id }} ? 'rotate-180 text-blue-600' : 'text-slate-400'"
+                            class="w-5 h-5 transition-transform duration-300 shrink-0" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div 
+                        x-show="activeFaq === {{ $faq->id }}" 
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        class="px-8 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4"
+                    >
+                        {!! nl2br(e($faq->answer)) !!}
+                    </div>
+                </div>
+            @empty
+                <div class="text-center py-12 text-slate-400 font-medium">
+                    Belum ada FAQ yang dipublikasikan.
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="py-32">
     <div class="container mx-auto px-4 lg:px-8">
