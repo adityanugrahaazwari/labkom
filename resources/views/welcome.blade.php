@@ -4,7 +4,8 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-slate-900 pt-32 pb-48 overflow-hidden">
+<section class="relative bg-slate-900 pt-32 pb-48 overflow-hidden" 
+         @if(!empty($settings['hero_image'])) style="background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('{{ asset('storage/' . $settings['hero_image']) }}'); background-size: cover; background-position: center;" @endif>
     <div class="absolute inset-0 opacity-20">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-transparent"></div>
         <div class="grid grid-cols-12 h-full w-full">
@@ -16,15 +17,19 @@
     
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
         <span class="inline-block px-4 py-1.5 bg-blue-600/20 text-blue-400 text-xs font-bold rounded-full border border-blue-600/30 mb-6 uppercase tracking-widest">Digital Excellence</span>
-        <h1 class="text-4xl md:text-7xl font-bold text-white mb-8 leading-tight">
-            Laboratorium Komputer <br> <span class="text-blue-500 text-3xl md:text-5xl">Jurusan Komputer dan Bisnis</span>
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+            {{ $settings['hero_title'] ?? 'Pusat Riset dan Pembelajaran Teknologi Informasi' }}
         </h1>
         <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-            Selamat datang di portal resmi Laboratorium Komputer. Kami menyediakan fasilitas modern dan ekosistem riset untuk mendukung kemajuan teknologi informasi di Jurusan Komputer dan Bisnis.
+            {{ $settings['hero_subtitle'] ?? 'Laboratorium Komputer menyelenggarakan kegiatan akademik praktikum, pelatihan teknologi, riset ilmiah, serta sertifikasi kompetensi global.' }}
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="{{ route('berita.index') }}" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">Jelajahi Kegiatan</a>
-            <a href="{{ route('profil.visi-misi') }}" class="w-full sm:w-auto px-8 py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/20 transition border border-white/10 backdrop-blur-sm">Tentang Kami</a>
+            <a href="{{ $settings['hero_primary_btn_url'] ?? '#' }}" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">
+                {{ $settings['hero_primary_btn_text'] ?? 'Jelajahi Fasilitas' }}
+            </a>
+            <a href="{{ $settings['hero_secondary_btn_url'] ?? '#' }}" class="w-full sm:w-auto px-8 py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/20 transition border border-white/10 backdrop-blur-sm">
+                {{ $settings['hero_secondary_btn_text'] ?? 'Lihat Unduhan' }}
+            </a>
         </div>
     </div>
 </section>
@@ -56,20 +61,34 @@
     <div class="container mx-auto px-4 lg:px-8">
         <div class="flex flex-col lg:flex-row items-center gap-16">
             <div class="lg:w-1/2 relative">
-                <div class="aspect-square bg-slate-200 rounded-[3rem] overflow-hidden"></div>
+                <div class="aspect-square bg-slate-200 rounded-[3rem] overflow-hidden border border-slate-200 shadow-md">
+                    @if(!empty($settings['greetings_avatar']))
+                        <img src="{{ asset('storage/' . $settings['greetings_avatar']) }}" class="w-full h-full object-cover">
+                    @else
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($settings['greetings_name'] ?? 'Dr. Aditya Nugraha, M.T.') }}&background=0D8ABC&color=fff&size=512" class="w-full h-full object-cover">
+                    @endif
+                </div>
                 <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-blue-600 rounded-3xl -z-10"></div>
             </div>
             <div class="lg:w-1/2">
-                <h2 class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-4">Sambutan Kepala Lab</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">Membangun Masa Depan Melalui Teknologi</h3>
-                <p class="text-slate-600 text-lg leading-relaxed mb-8 italic">
-                    "Laboratorium Komputer bukan sekadar tempat praktikum, melainkan inkubator kreativitas dan pusat pengembangan solusi teknologi yang relevan dengan kebutuhan industri."
+                <h2 class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-4">
+                    {{ $settings['greetings_title'] ?? 'Sambutan Kepala Laboratorium' }}
+                </h2>
+                <h3 class="text-2xl md:text-4xl font-bold text-slate-900 mb-8 leading-tight">
+                    Membangun Masa Depan Melalui Teknologi
+                </h3>
+                <p class="text-slate-600 text-base leading-relaxed mb-8 italic">
+                    "{{ $settings['greetings_content'] ?? 'Selamat datang di portal resmi Laboratorium Komputer...' }}"
                 </p>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
                     <div>
-                        <div class="font-bold text-lg">Dr. Aditya, S.Kom., M.T.</div>
-                        <div class="text-sm text-slate-500">Kepala Laboratorium Komputer</div>
+                        <div class="font-bold text-lg">
+                            {{ $settings['greetings_name'] ?? 'Dr. Aditya Nugraha, M.T.' }}
+                        </div>
+                        <div class="text-sm text-slate-500">
+                            {{ $settings['greetings_role'] ?? 'Kepala Laboratorium Komputer' }}
+                        </div>
                     </div>
                 </div>
             </div>

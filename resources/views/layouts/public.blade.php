@@ -136,11 +136,20 @@
                         <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">L</div>
                         <span class="font-bold text-xl text-white">LABKOM</span>
                     </div>
-                    <p class="text-sm leading-relaxed mb-6">Pusat informasi dan layanan digital Laboratorium Komputer untuk mendukung kegiatan akademik dan riset teknologi informasi.</p>
+                    <p class="text-sm leading-relaxed mb-6">{{ \App\Models\Setting::get('footer_about', 'Pusat informasi dan layanan digital Laboratorium Komputer untuk mendukung kegiatan akademik dan riset teknologi informasi.') }}</p>
                     <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-youtube"></i></a>
+                        @if(\App\Models\Setting::get('social_facebook'))
+                            <a href="{{ \App\Models\Setting::get('social_facebook') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_instagram'))
+                            <a href="{{ \App\Models\Setting::get('social_instagram') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-instagram"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_youtube'))
+                            <a href="{{ \App\Models\Setting::get('social_youtube') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-youtube"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_linkedin'))
+                            <a href="{{ \App\Models\Setting::get('social_linkedin') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        @endif
                     </div>
                 </div>
                 <div>
@@ -161,17 +170,21 @@
                     <ul class="flex flex-col gap-4 text-sm">
                         <li class="flex items-start gap-3">
                             <svg class="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span>Gedung Laboratorium Terpadu, Lt. 3, Kampus Utama.</span>
+                            <span>{{ \App\Models\Setting::get('footer_address', 'Gedung Laboratorium Terpadu, Lt. 3, Kampus Utama.') }}</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span>labkom@university.ac.id</span>
+                            <span>{{ \App\Models\Setting::get('footer_email', 'labkom@institusi.ac.id') }}</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <span>{{ \App\Models\Setting::get('footer_phone', '+62 123 4567 890') }}</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="container mx-auto px-4 lg:px-8 border-t border-slate-800 mt-16 pt-8 text-center text-xs">
-                <p>&copy; 2026 CMS Laboratorium Komputer. All rights reserved. Powered by Laravel & Tailwind CSS.</p>
+                <p>{{ \App\Models\Setting::get('footer_copyright', '© 2026 Laboratorium Komputer. All rights reserved.') }} Powered by Laravel & Tailwind CSS.</p>
             </div>
         </footer>
     </div>

@@ -732,4 +732,4 @@ Modul yang dapat dikembangkan pada versi berikutnya:
 
 ---
 
-END OF DOCUMENTgemgemini
+END OF DOCUMENT

@@ -8,7 +8,8 @@ class PublicController extends Controller
 {
     public function home()
     {
-        return view('welcome');
+        $settings = \App\Models\Setting::pluck('value', 'key')->all();
+        return view('welcome', compact('settings'));
     }
 
     public function visiMisi()
