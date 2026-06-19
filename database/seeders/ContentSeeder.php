@@ -194,5 +194,39 @@ class ContentSeeder extends Seeder
             'image' => null,
             'status' => true,
         ]);
+
+        // 7. Seed Audit Logs
+        \App\Models\AuditLog::create([
+            'user_id' => 1,
+            'action' => 'tambah',
+            'model_type' => 'App\Models\News',
+            'model_id' => 1,
+            'description' => "Aditya Admin menambahkan Berita 'Workshop Pemrograman Modern dengan Laravel & Tailwind CSS'",
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/125.0.0.0',
+            'created_at' => now()->subMinutes(12),
+        ]);
+
+        \App\Models\AuditLog::create([
+            'user_id' => 1,
+            'action' => 'tambah',
+            'model_type' => 'App\Models\Laboratory',
+            'model_id' => 1,
+            'description' => "Aditya Admin menambahkan Laboratorium 'Laboratorium Programming'",
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/125.0.0.0',
+            'created_at' => now()->subHours(2),
+        ]);
+
+        \App\Models\AuditLog::create([
+            'user_id' => 2,
+            'action' => 'ubah',
+            'model_type' => 'App\Models\Faq',
+            'model_id' => 2,
+            'description' => "Content Admin mengubah FAQ 'Kapan jam operasional Laboratorium Komputer?'",
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/125.0.0.0',
+            'created_at' => now()->subHours(5),
+        ]);
     }
 }

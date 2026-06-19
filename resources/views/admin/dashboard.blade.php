@@ -1,150 +1,176 @@
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
-@section('subtitle', 'Selamat datang kembali, Aditya. Berikut adalah ringkasan aktivitas hari ini.')
-
-@section('actions')
-    <div class="flex gap-3">
-        <button class="px-4 py-2 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl text-sm hover:bg-slate-50 transition flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            Export Laporan
-        </button>
-        <button class="px-4 py-2 bg-blue-600 text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition flex items-center gap-2 shadow-lg shadow-blue-100">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            Tambah Konten
-        </button>
-    </div>
-@endsection
+@section('subtitle', 'Selamat datang kembali, ' . auth()->user()->name . '. Berikut adalah ringkasan aktivitas sistem.')
 
 @section('content')
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         @php
             $stats = [
-                ['label' => 'Total Berita', 'value' => '124', 'trend' => '+12%', 'icon' => 'newspaper', 'color' => 'blue'],
-                ['label' => 'Pengumuman', 'value' => '42', 'trend' => '+2', 'icon' => 'speakerphone', 'color' => 'indigo'],
-                ['label' => 'Total Agenda', 'value' => '12', 'trend' => '-1', 'icon' => 'calendar', 'color' => 'green'],
-                ['label' => 'Pengunjung', 'value' => '1.2k', 'trend' => '+18%', 'icon' => 'user-group', 'color' => 'purple'],
+                ['label' => 'Total Berita', 'value' => $totalNews, 'trend' => $totalNewsViews . ' Baca', 'icon' => 'newspaper', 'color' => 'blue'],
+                ['label' => 'Agenda Kegiatan', 'value' => $totalAgenda, 'trend' => 'Aktif', 'icon' => 'calendar', 'color' => 'green'],
+                ['label' => 'Dokumen Unduhan', 'value' => $totalDocument, 'trend' => $totalDownloads . ' Unduh', 'icon' => 'folder-open', 'color' => 'indigo'],
+                ['label' => 'Tanya Jawab (FAQ)', 'value' => $totalFaq, 'trend' => 'Aktif', 'icon' => 'question-mark-circle', 'color' => 'purple'],
             ];
         @endphp
 
         @foreach ($stats as $stat)
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
             <div class="flex items-center justify-between mb-4">
-                <div class="w-10 h-10 bg-{{ $stat['color'] }}-100 rounded-xl flex items-center justify-center text-{{ $stat['color'] }}-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        @if($stat['icon'] == 'newspaper') <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                        @elseif($stat['icon'] == 'speakerphone') <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
-                        @elseif($stat['icon'] == 'calendar') <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        @else <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                @php
+                    $bgClass = match($stat['color']) {
+                        'blue' => 'bg-blue-50 text-blue-600 border-blue-100/50',
+                        'green' => 'bg-emerald-50 text-emerald-600 border-emerald-100/50',
+                        'indigo' => 'bg-indigo-50 text-indigo-600 border-indigo-100/50',
+                        'purple' => 'bg-purple-50 text-purple-600 border-purple-100/50',
+                        default => 'bg-slate-50 text-slate-600 border-slate-100/50'
+                    };
+                @endphp
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center border {{ $bgClass }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        @if($stat['icon'] == 'newspaper')
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        @elseif($stat['icon'] == 'calendar')
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        @elseif($stat['icon'] == 'folder-open')
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm0 0V9"></path>
+                        @elseif($stat['icon'] == 'question-mark-circle')
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        @else
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         @endif
                     </svg>
                 </div>
-                <span class="text-xs font-bold {{ str_contains($stat['trend'], '+') ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50' }} px-2 py-1 rounded-full">
+                <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 border border-slate-200/50 rounded-full font-mono">
                     {{ $stat['trend'] }}
                 </span>
             </div>
-            <p class="text-2xl font-black text-slate-900">{{ $stat['value'] }}</p>
-            <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">{{ $stat['label'] }}</p>
+            <p class="text-2xl font-black text-slate-900 font-mono">{{ $stat['value'] }}</p>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">{{ $stat['label'] }}</p>
         </div>
         @endforeach
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Recent Activities -->
+        <!-- Recent Activities / News -->
         <div class="lg:col-span-2 space-y-8">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-                    <h3 class="font-bold text-slate-900">Konten Terbaru</h3>
-                    <a href="#" class="text-xs font-bold text-blue-600 hover:underline">Lihat Semua</a>
+                    <h3 class="font-bold text-slate-900">Berita Terbaru</h3>
+                    <a href="{{ route('admin.berita.index') }}" class="text-xs font-bold text-blue-600 hover:underline">Lihat Semua</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-50">
-                                <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Judul Konten</th>
-                                <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tipe</th>
-                                <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</th>
-                                <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tanggal</th>
+                            <tr class="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                <th class="px-6 py-4">Judul Konten</th>
+                                <th class="px-6 py-4">Kategori</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Tanggal Buat</th>
                                 <th class="px-6 py-4"></th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
-                            @for ($i = 1; $i <= 5; $i++)
-                            <tr class="hover:bg-slate-50 transition">
+                            @forelse ($recentNews as $item)
+                            <tr class="hover:bg-slate-50/50 transition">
                                 <td class="px-6 py-4">
-                                    <p class="text-sm font-bold text-slate-900 line-clamp-1">Workshop AI untuk Mahasiswa Tingkat Akhir</p>
-                                    <p class="text-[10px] text-slate-500">Oleh: Admin Lab</p>
+                                    <p class="text-sm font-bold text-slate-900 line-clamp-1" title="{{ $item->title }}">{{ $item->title }}</p>
+                                    <p class="text-[10px] text-slate-400">Oleh: {{ $item->user->name ?? 'Admin' }}</p>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-lg uppercase">Berita</span>
+                                    <span class="px-2 py-0.5 bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-bold rounded-lg uppercase">
+                                        {{ $item->category->name ?? 'Berita' }}
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center gap-1.5">
-                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                                        <span class="text-xs font-medium text-slate-700">Published</span>
-                                    </div>
+                                    @if($item->is_published)
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
+                                            <span class="text-xs font-semibold text-slate-600">Published</span>
+                                        </div>
+                                    @else
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                                            <span class="text-xs font-semibold text-slate-600">Draft</span>
+                                        </div>
+                                    @endif
                                 </td>
-                                <td class="px-6 py-4 text-xs text-slate-500">12 Jun 2026</td>
+                                <td class="px-6 py-4 text-xs font-mono text-slate-500">
+                                    {{ $item->published_at ? \Carbon\Carbon::parse($item->published_at)->format('d M Y') : $item->created_at->format('d M Y') }}
+                                </td>
                                 <td class="px-6 py-4 text-right">
-                                    <button class="p-2 hover:bg-slate-100 rounded-lg transition text-slate-400">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
-                                    </button>
+                                    <a href="{{ route('admin.berita.edit', $item) }}" class="p-2 hover:bg-slate-100 rounded-lg transition inline-block text-blue-600" title="Edit">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    </a>
                                 </td>
                             </tr>
-                            @endfor
+                            @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-8 text-center text-slate-400">
+                                    Belum ada konten berita.
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- System Logs -->
+        <!-- System Activity Logs -->
         <div class="space-y-8">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
-                <h3 class="font-bold text-slate-900 mb-6">Log Aktivitas</h3>
-                <div class="space-y-6 relative before:absolute before:inset-y-0 before:left-3 before:w-px before:bg-slate-100">
-                    @php
-                        $logs = [
-                            ['user' => 'Aditya', 'action' => 'menerbitkan berita baru', 'time' => '2 menit yang lalu'],
-                            ['user' => 'Sistem', 'action' => 'backup database berhasil', 'time' => '1 jam yang lalu'],
-                            ['user' => 'Budi', 'action' => 'mengubah jadwal agenda', 'time' => '3 jam yang lalu'],
-                            ['user' => 'Rina', 'action' => 'mengunggah galeri foto', 'time' => 'Kemarin'],
-                        ];
-                    @endphp
-
-                    @foreach ($logs as $log)
+                <h3 class="font-bold text-slate-900 mb-6">Log Aktivitas Admin</h3>
+                <div class="space-y-6 relative before:absolute before:inset-y-0 before:left-3 before:w-px before:bg-slate-100 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+                    @forelse ($recentLogs as $log)
                     <div class="relative pl-8">
-                        <div class="absolute left-0 top-1.5 w-6 h-6 bg-white border-2 border-slate-100 rounded-full flex items-center justify-center z-10">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div class="absolute left-0 top-1.5 w-6 h-6 bg-white border border-slate-150 rounded-full flex items-center justify-center z-10 shadow-sm">
+                            @php
+                                $dotColor = match($log->action) {
+                                    'tambah' => 'bg-emerald-500',
+                                    'ubah' => 'bg-blue-500',
+                                    'hapus' => 'bg-rose-500',
+                                    default => 'bg-slate-400'
+                                };
+                            @endphp
+                            <div class="w-1.5 h-1.5 {{ $dotColor }} rounded-full"></div>
                         </div>
-                        <p class="text-sm">
-                            <span class="font-bold text-slate-900">{{ $log['user'] }}</span>
-                            <span class="text-slate-600">{{ $log['action'] }}</span>
+                        <p class="text-xs text-slate-700 font-semibold leading-normal">
+                            {{ $log->description }}
                         </p>
-                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">{{ $log['time'] }}</p>
+                        <p class="text-[9px] text-slate-400 mt-1 uppercase font-bold tracking-wider font-mono" title="{{ $log->created_at->format('d M Y H:i:s') }} (IP: {{ $log->ip_address }})">
+                            {{ $log->created_at->diffForHumans() }} &bull; IP: {{ $log->ip_address }}
+                        </p>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="text-center py-8 text-slate-400 text-sm">
+                        Belum ada riwayat aktivitas.
+                    </div>
+                    @endforelse
                 </div>
-                <button class="w-full mt-8 py-3 bg-slate-50 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-100 transition">Lihat Seluruh Log</button>
             </div>
 
-            <!-- Storage Info -->
+            <!-- System Info -->
             <div class="bg-slate-900 rounded-3xl p-6 text-white shadow-xl shadow-slate-200">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="font-bold">Media Storage</h3>
-                    <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <h3 class="font-bold text-xs uppercase tracking-wider">Akses Pengguna & Fasilitas</h3>
+                    <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 </div>
-                <div class="mb-4">
-                    <div class="flex justify-between text-xs mb-2">
-                        <span class="text-slate-400">Terpakai: 1.2 GB</span>
-                        <span class="text-white">Total: 5 GB</span>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Total Pengguna Terdaftar</span>
+                        <span class="font-bold text-white font-mono">{{ $totalUser }} Akun</span>
                     </div>
-                    <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-blue-500 rounded-full w-[24%]"></div>
+                    <div class="flex items-center justify-between text-xs border-t border-slate-800 pt-3">
+                        <span class="text-slate-400">Laboratorium Aktif</span>
+                        <span class="font-bold text-white font-mono">{{ $totalLab }} Ruang</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs border-t border-slate-800 pt-3">
+                        <span class="text-slate-400">Pertanyaan FAQ</span>
+                        <span class="font-bold text-white font-mono">{{ $totalFaq }} Pasang</span>
                     </div>
                 </div>
-                <p class="text-[10px] text-slate-500 italic">Otomatis dibersihkan setiap 30 hari.</p>
             </div>
         </div>
     </div>
