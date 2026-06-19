@@ -11,21 +11,21 @@ class LaboratoryTest extends TestCase
 
     public function test_laboratory_detail_page_shows_penanggung_jawab_details(): void
     {
+        $this->seed();
         $slugs = [
             'laboratorium-programming',
             'laboratorium-networking',
             'laboratorium-multimedia',
             'laboratorium-ai-data-science',
-            'laboratorium-hardware',
+            'laboratorium-hardware-iot',
         ];
 
         foreach ($slugs as $slug) {
             $response = $this->get('/fasilitas/laboratorium/' . $slug);
 
             $response->assertStatus(200);
-            $response->assertSee('Penanggung Jawab Laboratorium');
-            $response->assertSee('Penanggung Jawab');
-            $response->assertSee('NIP:');
+            $response->assertSee('Kepala / Penanggung Jawab');
+            $response->assertSee('Informasi Ruangan');
         }
     }
 }
