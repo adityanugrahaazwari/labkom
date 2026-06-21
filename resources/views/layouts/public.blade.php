@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> <!-- Placeholder for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         [x-cloak] { display: none !important; }
     </style>
@@ -179,6 +179,12 @@
                         @endif
                         @if(\App\Models\Setting::get('social_linkedin'))
                             <a href="{{ \App\Models\Setting::get('social_linkedin') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_tiktok'))
+                            <a href="{{ \App\Models\Setting::get('social_tiktok') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-tiktok"></i></a>
+                        @endif
+                        @if(\App\Models\Setting::get('social_twitter'))
+                            <a href="{{ \App\Models\Setting::get('social_twitter') }}" target="_blank" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-x-twitter"></i></a>
                         @endif
                     </div>
                 </div>

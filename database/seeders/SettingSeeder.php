@@ -41,6 +41,8 @@ class SettingSeeder extends Seeder
             'social_facebook' => 'https://facebook.com',
             'social_youtube' => 'https://youtube.com',
             'social_linkedin' => 'https://linkedin.com',
+            'social_tiktok' => '',
+            'social_twitter' => '',
         ];
 
         foreach ($settings as $key => $value) {

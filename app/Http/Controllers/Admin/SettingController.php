@@ -46,6 +46,8 @@ class SettingController extends Controller
             'social_facebook' => ['nullable', 'url'],
             'social_youtube' => ['nullable', 'url'],
             'social_linkedin' => ['nullable', 'url'],
+            'social_tiktok' => ['nullable', 'url'],
+            'social_twitter' => ['nullable', 'url'],
         ]);
 
         $keys = [
@@ -53,7 +55,8 @@ class SettingController extends Controller
             'hero_secondary_btn_text', 'hero_secondary_btn_url', 'greetings_title',
             'greetings_name', 'greetings_role', 'greetings_content', 'footer_about',
             'footer_address', 'footer_email', 'footer_phone', 'footer_copyright',
-            'social_instagram', 'social_facebook', 'social_youtube', 'social_linkedin'
+            'social_instagram', 'social_facebook', 'social_youtube', 'social_linkedin',
+            'social_tiktok', 'social_twitter'
         ];
 
         foreach ($keys as $key) {
