@@ -23,20 +23,20 @@ class PublicController extends Controller
         return view('welcome', compact('settings', 'latestNews', 'upcomingAgendas', 'faqs'));
     }
 
-    public function visiMisi()
+    public function visionMission()
     {
-        $visiMisi = \App\Models\VisiMisi::first();
-        return view('profil.visi-misi', compact('visiMisi'));
+        $visionMission = \App\Models\VisionMission::first();
+        return view('profil.vision-mission', compact('visionMission'));
     }
 
-    public function strukturOrganisasi()
+    public function organizationalStructure()
     {
-        $rootMembers = \App\Models\StrukturOrganisasi::with('children')
+        $rootMembers = \App\Models\OrganizationalStructure::with('children')
             ->whereNull('parent_id')
             ->orderBy('order')
             ->orderBy('id')
             ->get();
-        return view('profil.struktur-organisasi', compact('rootMembers'));
+        return view('profil.organizational-structure', compact('rootMembers'));
     }
 
     public function laboratorium()

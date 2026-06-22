@@ -44,7 +44,7 @@
             @endif
             
             @foreach($node->children as $child)
-                @include('profil.struktur-node', ['node' => $child])
+                @include('profil.organizational-node', ['node' => $child])
             @endforeach
         </div>
     @endif

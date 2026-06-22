@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\VisiMisiController;
-use App\Http\Controllers\Admin\StrukturOrganisasiController;
+use App\Http\Controllers\Admin\VisionMissionController;
+use App\Http\Controllers\Admin\OrganizationalStructureController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\DocumentController;
@@ -23,8 +23,8 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [PublicController::class, 'home'])->name('home');
 
 Route::prefix('profil')->name('profil.')->group(function () {
-    Route::get('/visi-misi', [PublicController::class, 'visiMisi'])->name('visi-misi');
-    Route::get('/struktur-organisasi', [PublicController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
+    Route::get('/vision-mission', [PublicController::class, 'visionMission'])->name('vision-mission');
+    Route::get('/organizational-structure', [PublicController::class, 'organizationalStructure'])->name('organizational-structure');
 });
 
 Route::prefix('fasilitas')->name('fasilitas.')->group(function () {
@@ -93,9 +93,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Profiles & Organisasi Management
         Route::middleware('can:manage-profiles')->group(function () {
-            Route::get('visi-misi', [VisiMisiController::class, 'edit'])->name('visi-misi.edit');
-            Route::put('visi-misi', [VisiMisiController::class, 'update'])->name('visi-misi.update');
-            Route::resource('struktur-organisasi', StrukturOrganisasiController::class)->except(['show']);
+            Route::get('vision-mission', [VisionMissionController::class, 'edit'])->name('vision-mission.edit');
+            Route::put('vision-mission', [VisionMissionController::class, 'update'])->name('vision-mission.update');
+            Route::resource('organizational-structure', OrganizationalStructureController::class)->except(['show']);
         });
 
         // News & Categories Management

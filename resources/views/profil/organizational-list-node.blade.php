@@ -27,7 +27,7 @@
             </div>
             
             @if($child->children->isNotEmpty())
-                @include('profil.struktur-list-node', ['children' => $child->children])
+                @include('profil.organizational-list-node', ['children' => $child->children])
             @endif
         </div>
     @endforeach

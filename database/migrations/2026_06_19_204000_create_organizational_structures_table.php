@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('struktur_organisasis', function (Blueprint $table) {
+        Schema::create('organizational_structures', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name');
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreign('parent_id')
                 ->references('id')
-                ->on('struktur_organisasis')
+                ->on('organizational_structures')
                 ->onDelete('set null');
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('struktur_organisasis');
+        Schema::dropIfExists('organizational_structures');
     }
 };

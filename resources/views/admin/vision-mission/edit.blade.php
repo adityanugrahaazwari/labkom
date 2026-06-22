@@ -5,23 +5,23 @@
 
 @section('content')
 <div class="max-w-4xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-    <form action="{{ route('admin.visi-misi.update') }}" method="POST" class="space-y-8">
+    <form action="{{ route('admin.vision-mission.update') }}" method="POST" class="space-y-8">
         @csrf
         @method('PUT')
 
         <!-- Vision Section -->
         <div class="space-y-3">
-            <label for="visi" class="text-sm font-bold text-slate-900 block">Pernyataan Visi</label>
+            <label for="vision" class="text-sm font-bold text-slate-900 block">Pernyataan Visi</label>
             <p class="text-xs text-slate-500">Pernyataan visi utama dari Laboratorium Komputer.</p>
             <textarea 
-                name="visi" 
-                id="visi" 
+                name="vision" 
+                id="vision" 
                 rows="4" 
                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium text-slate-700 leading-relaxed italic"
                 placeholder="Masukkan visi..."
                 required
-            >{{ old('visi', $visiMisi->visi) }}</textarea>
-            @error('visi')
+            >{{ old('vision', $visionMission->vision) }}</textarea>
+            @error('vision')
                 <p class="text-xs text-rose-500">{{ $message }}</p>
             @enderror
         </div>
@@ -30,7 +30,7 @@
 
         <!-- Mission Section with Alpine.js -->
         <div x-data="{ 
-            items: {{ json_encode(old('misi', $visiMisi->misi ?? [''])) }},
+            items: {{ json_encode(old('missions', $visionMission->missions ?? [''])) }},
             addItem() {
                 this.items.push('');
             },
@@ -53,7 +53,7 @@
                         <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm shrink-0" x-text="index + 1"></div>
                         <input 
                             type="text" 
-                            name="misi[]" 
+                            name="missions[]" 
                             x-model="items[index]"
                             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium text-slate-700"
                             placeholder="Masukkan poin misi..."
@@ -71,7 +71,7 @@
                 </template>
             </div>
 
-            @error('misi')
+            @error('missions')
                 <p class="text-xs text-rose-500 mt-1">{{ $message }}</p>
             @enderror
 

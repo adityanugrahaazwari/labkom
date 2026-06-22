@@ -47,10 +47,10 @@
                              x-transition:leave-start="opacity-100 translate-y-0"
                              x-transition:leave-end="opacity-0 translate-y-1"
                              class="absolute left-0 mt-4 w-56 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
-                            <a href="{{ route('profil.visi-misi') }}" 
-                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.visi-misi') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Visi & Misi</a>   
-                            <a href="{{ route('profil.struktur-organisasi') }}" 
-                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.struktur-organisasi') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Struktur Organisasi</a>
+                            <a href="{{ route('profil.vision-mission') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.vision-mission') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Visi & Misi</a>   
+                            <a href="{{ route('profil.organizational-structure') }}" 
+                               class="block px-4 py-2 text-sm transition {{ request()->routeIs('profil.organizational-structure') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600' }}">Struktur Organisasi</a>
                         </div>
                     </div>
 
@@ -118,10 +118,10 @@
                             Profil <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" class="pl-4 mt-2 flex flex-col gap-2">
-                            <a href="{{ route('profil.visi-misi') }}" 
-                               class="text-sm {{ request()->routeIs('profil.visi-misi') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Visi & Misi</a>
-                            <a href="{{ route('profil.struktur-organisasi') }}" 
-                               class="text-sm {{ request()->routeIs('profil.struktur-organisasi') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Struktur Organisasi</a>
+                            <a href="{{ route('profil.vision-mission') }}" 
+                               class="text-sm {{ request()->routeIs('profil.vision-mission') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Visi & Misi</a>
+                            <a href="{{ route('profil.organizational-structure') }}" 
+                               class="text-sm {{ request()->routeIs('profil.organizational-structure') ? 'text-blue-600 font-bold' : 'text-slate-600' }}">Struktur Organisasi</a>
                         </div>
                     </div>
                     <div x-data="{ open: {{ request()->routeIs('fasilitas.*') ? 'true' : 'false' }} }">
@@ -191,8 +191,8 @@
                 <div>
                     <h4 class="font-bold text-white mb-6">Profil</h4>
                     <ul class="flex flex-col gap-3 text-sm">
-                        <li><a href="{{ route('profil.visi-misi') }}" class="hover:text-blue-400 transition">Visi & Misi</a></li>
-                        <li><a href="{{ route('profil.struktur-organisasi') }}" class="hover:text-blue-400 transition">Struktur Organisasi</a></li>
+                        <li><a href="{{ route('profil.vision-mission') }}" class="hover:text-blue-400 transition">Visi & Misi</a></li>
+                        <li><a href="{{ route('profil.organizational-structure') }}" class="hover:text-blue-400 transition">Struktur Organisasi</a></li>
                     </ul>
                 </div>
                 <div>

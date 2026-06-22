@@ -19,7 +19,7 @@
             </h2>
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                 <p class="text-lg text-slate-700 leading-relaxed italic">
-                    "{{ $visiMisi->visi ?? 'Belum ada visi.' }}"
+                    "{{ $visionMission->vision ?? 'Belum ada visi.' }}"
                 </p>
             </div>
         </section>
@@ -30,8 +30,8 @@
                 Misi
             </h2>
             <div class="grid gap-6">
-                @if($visiMisi && is_array($visiMisi->misi))
-                    @foreach($visiMisi->misi as $index => $point)
+                @if($visionMission && is_array($visionMission->missions))
+                    @foreach($visionMission->missions as $index => $point)
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex gap-4 hover:shadow-md transition">
                             <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold shrink-0">{{ $index + 1 }}</div>
                             <p class="text-slate-700">{{ $point }}</p>

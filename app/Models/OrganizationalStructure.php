@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StrukturOrganisasi extends Model
+class OrganizationalStructure extends Model
 {
-    protected $table = 'struktur_organisasis';
+    protected $table = 'organizational_structures';
 
     protected $fillable = [
         'parent_id',

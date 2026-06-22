@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             MenuSeeder::class,
             SettingSeeder::class,
-            VisiMisiAndStrukturSeeder::class,
+            VisionMissionAndStructureSeeder::class,
             ContentSeeder::class,
         ]);
     }

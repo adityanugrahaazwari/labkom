@@ -51,7 +51,7 @@
             <div x-show="activeView === 'chart'" class="bg-slate-50 border border-slate-200 rounded-3xl p-10 overflow-x-auto shadow-inner flex justify-center">
                 <div class="inline-flex py-4 flex-col items-center gap-16">
                     @foreach($rootMembers as $root)
-                        @include('profil.struktur-node', ['node' => $root])
+                        @include('profil.organizational-node', ['node' => $root])
                     @endforeach
                 </div>
             </div>
@@ -83,7 +83,7 @@
                         </div>
 
                         @if($root->children->isNotEmpty())
-                            @include('profil.struktur-list-node', ['children' => $root->children])
+                            @include('profil.organizational-list-node', ['children' => $root->children])
                         @endif
                     </div>
                 @endforeach

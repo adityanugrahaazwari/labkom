@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-3xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-    <form action="{{ route('admin.struktur-organisasi.update', $strukturOrganisasi) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.organizational-structure.update', $organizationalStructure) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PUT')
 
@@ -17,7 +17,7 @@
                     type="text" 
                     name="name" 
                     id="name" 
-                    value="{{ old('name', $strukturOrganisasi->name) }}"
+                    value="{{ old('name', $organizationalStructure->name) }}"
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium"
                     required
                 >
@@ -33,7 +33,7 @@
                     type="text" 
                     name="position" 
                     id="position" 
-                    value="{{ old('position', $strukturOrganisasi->position) }}"
+                    value="{{ old('position', $organizationalStructure->position) }}"
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium"
                     required
                 >
@@ -49,7 +49,7 @@
                     type="text" 
                     name="nip" 
                     id="nip" 
-                    value="{{ old('nip', $strukturOrganisasi->nip) }}"
+                    value="{{ old('nip', $organizationalStructure->nip) }}"
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium"
                 >
                 @error('nip')
@@ -67,7 +67,7 @@
                 >
                     <option value="">-- Tidak Ada Atasan (Pimpinan Tertinggi / Root) --</option>
                     @foreach($parents as $p)
-                        <option value="{{ $p->id }}" {{ old('parent_id', $strukturOrganisasi->parent_id) == $p->id ? 'selected' : '' }}>
+                        <option value="{{ $p->id }}" {{ old('parent_id', $organizationalStructure->parent_id) == $p->id ? 'selected' : '' }}>
                             {{ $p->name }} ({{ $p->position }})
                         </option>
                     @endforeach
@@ -85,7 +85,7 @@
                     type="text" 
                     name="specialty" 
                     id="specialty" 
-                    value="{{ old('specialty', $strukturOrganisasi->specialty) }}"
+                    value="{{ old('specialty', $organizationalStructure->specialty) }}"
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium"
                 >
                 @error('specialty')
@@ -100,7 +100,7 @@
                     type="number" 
                     name="order" 
                     id="order" 
-                    value="{{ old('order', $strukturOrganisasi->order) }}"
+                    value="{{ old('order', $organizationalStructure->order) }}"
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition text-sm font-medium"
                     min="0"
                     required
@@ -115,8 +115,8 @@
                 <label class="text-sm font-semibold text-slate-700 block">Foto Profil (Avatar)</label>
                 <div class="flex items-center gap-6 p-4 border border-slate-200 rounded-2xl">
                     <div class="w-20 h-20 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-slate-300 overflow-hidden shrink-0">
-                        @if($strukturOrganisasi->avatar)
-                            <img src="{{ asset('storage/' . $strukturOrganisasi->avatar) }}" class="w-full h-full object-cover">
+                        @if($organizationalStructure->avatar)
+                            <img src="{{ asset('storage/' . $organizationalStructure->avatar) }}" class="w-full h-full object-cover">
                         @else
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         @endif
@@ -137,7 +137,7 @@
             <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl text-sm transition">
                 Simpan Perubahan
             </button>
-            <a href="{{ route('admin.struktur-organisasi.index') }}" class="px-5 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl text-sm transition">
+            <a href="{{ route('admin.organizational-structure.index') }}" class="px-5 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl text-sm transition">
                 Batal
             </a>
         </div>

@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-3xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-    <form action="{{ route('admin.struktur-organisasi.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.organizational-structure.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@
             <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl text-sm transition">
                 Simpan Anggota
             </button>
-            <a href="{{ route('admin.struktur-organisasi.index') }}" class="px-5 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl text-sm transition">
+            <a href="{{ route('admin.organizational-structure.index') }}" class="px-5 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl text-sm transition">
                 Batal
             </a>
         </div>

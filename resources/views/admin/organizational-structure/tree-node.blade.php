@@ -28,10 +28,10 @@
                 
                 <div class="flex items-center gap-2">
                     <span class="text-xs font-semibold px-2 py-0.5 bg-slate-100 text-slate-600 rounded">Urutan: {{ $child->order }}</span>
-                    <a href="{{ route('admin.struktur-organisasi.edit', $child) }}" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit Anggota">
+                    <a href="{{ route('admin.organizational-structure.edit', $child) }}" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit Anggota">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </a>
-                    <form action="{{ route('admin.struktur-organisasi.destroy', $child) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus anggota ini? Anggota di bawahnya akan diset tanpa atasan.')" class="inline">
+                    <form action="{{ route('admin.organizational-structure.destroy', $child) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus anggota ini? Anggota di bawahnya akan diset tanpa atasan.')" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Hapus Anggota">
@@ -42,7 +42,7 @@
             </div>
             
             @if($child->children->isNotEmpty())
-                @include('admin.struktur-organisasi.tree-node', ['children' => $child->children])
+                @include('admin.organizational-structure.tree-node', ['children' => $child->children])
             @endif
         </div>
     @endforeach

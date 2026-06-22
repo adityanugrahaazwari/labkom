@@ -53,8 +53,8 @@ class MenuSeeder extends Seeder
         Menu::create([
             'parent_id' => $profil->id,
             'name' => 'Visi & Misi',
-            'url' => '/profil/visi-misi',
-            'route_name' => 'profil.visi-misi',
+            'url' => '/profil/vision-mission',
+            'route_name' => 'profil.vision-mission',
             'order' => 1,
             'position' => 'header',
         ]);
@@ -62,8 +62,8 @@ class MenuSeeder extends Seeder
         Menu::create([
             'parent_id' => $profil->id,
             'name' => 'Struktur Organisasi',
-            'url' => '/profil/struktur-organisasi',
-            'route_name' => 'profil.struktur-organisasi',
+            'url' => '/profil/organizational-structure',
+            'route_name' => 'profil.organizational-structure',
             'order' => 2,
             'position' => 'header',
         ]);
@@ -239,8 +239,8 @@ class MenuSeeder extends Seeder
         Menu::create([
             'parent_id' => $profileGroup->id,
             'name' => 'Visi & Misi',
-            'url' => '/admin/visi-misi',
-            'route_name' => 'admin.visi-misi.edit',
+            'url' => '/admin/vision-mission',
+            'route_name' => 'admin.vision-mission.edit',
             'order' => 1,
             'position' => 'sidebar',
             'permission_id' => $manageProfiles?->id,
@@ -249,8 +249,8 @@ class MenuSeeder extends Seeder
         Menu::create([
             'parent_id' => $profileGroup->id,
             'name' => 'Struktur Organisasi',
-            'url' => '/admin/struktur-organisasi',
-            'route_name' => 'admin.struktur-organisasi.index',
+            'url' => '/admin/organizational-structure',
+            'route_name' => 'admin.organizational-structure.index',
             'order' => 2,
             'position' => 'sidebar',
             'permission_id' => $manageProfiles?->id,

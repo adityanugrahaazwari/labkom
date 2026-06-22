@@ -2,21 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\VisiMisi;
-use App\Models\StrukturOrganisasi;
+use App\Models\VisionMission;
+use App\Models\OrganizationalStructure;
 use Illuminate\Database\Seeder;
 
-class VisiMisiAndStrukturSeeder extends Seeder
+class VisionMissionAndStructureSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // 1. Seed Visi & Misi (Single Data)
-        VisiMisi::create([
-            'visi' => 'Menjadi pusat informasi digital Laboratorium Komputer yang modern, informatif, profesional, dan mudah diakses untuk mendukung kegiatan akademik, publikasi, dokumentasi, serta pelayanan informasi laboratorium.',
-            'misi' => [
+        // 1. Seed Vision & Mission (Single Data)
+        VisionMission::create([
+            'vision' => 'Menjadi pusat informasi digital Laboratorium Komputer yang modern, informatif, profesional, dan mudah diakses untuk mendukung kegiatan akademik, publikasi, dokumentasi, serta pelayanan informasi laboratorium.',
+            'missions' => [
                 'Menyediakan informasi laboratorium secara terpusat.',
                 'Mendukung penyebaran informasi yang cepat dan akurat.',
                 'Menyediakan sarana publikasi kegiatan laboratorium.',
@@ -27,7 +27,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
 
         // 2. Seed Struktur Organisasi (Tree Concept)
         // Level 1: Kepala Laboratorium
-        $kepala = StrukturOrganisasi::create([
+        $kepala = OrganizationalStructure::create([
             'parent_id' => null,
             'name' => 'Dr. Ir. H. Nama Kepala, M.T.',
             'position' => 'Kepala Laboratorium',
@@ -37,7 +37,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
         ]);
 
         // Level 2: Pranata Komputer Ahli Pertama
-        $pranataAhli1 = StrukturOrganisasi::create([
+        $pranataAhli1 = OrganizationalStructure::create([
             'parent_id' => $kepala->id,
             'name' => 'Nama Pranata Ahli 1',
             'position' => 'Pranata Komputer Ahli Pertama',
@@ -46,7 +46,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
             'order' => 1,
         ]);
 
-        $pranataAhli2 = StrukturOrganisasi::create([
+        $pranataAhli2 = OrganizationalStructure::create([
             'parent_id' => $kepala->id,
             'name' => 'Nama Pranata Ahli 2',
             'position' => 'Pranata Komputer Ahli Pertama',
@@ -56,7 +56,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
         ]);
 
         // Level 3: Pranata Komputer Terampil (reporting to Pranata Ahli 1)
-        $pranataTerampil1 = StrukturOrganisasi::create([
+        $pranataTerampil1 = OrganizationalStructure::create([
             'parent_id' => $pranataAhli1->id,
             'name' => 'Nama Pranata Terampil 1',
             'position' => 'Pranata Komputer Terampil',
@@ -65,7 +65,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
             'order' => 1,
         ]);
 
-        $pranataTerampil2 = StrukturOrganisasi::create([
+        $pranataTerampil2 = OrganizationalStructure::create([
             'parent_id' => $pranataAhli1->id,
             'name' => 'Nama Pranata Terampil 2',
             'position' => 'Pranata Komputer Terampil',
@@ -75,7 +75,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
         ]);
 
         // Level 3: Pranata Komputer Terampil (reporting to Pranata Ahli 2)
-        $pranataTerampil3 = StrukturOrganisasi::create([
+        $pranataTerampil3 = OrganizationalStructure::create([
             'parent_id' => $pranataAhli2->id,
             'name' => 'Nama Pranata Terampil 3',
             'position' => 'Pranata Komputer Terampil',
@@ -84,7 +84,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
             'order' => 1,
         ]);
 
-        $pranataTerampil4 = StrukturOrganisasi::create([
+        $pranataTerampil4 = OrganizationalStructure::create([
             'parent_id' => $pranataAhli2->id,
             'name' => 'Nama Pranata Terampil 4',
             'position' => 'Pranata Komputer Terampil',
@@ -94,7 +94,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
         ]);
 
         // Level 4: Teknisi Laboran (reporting to Terampil nodes)
-        StrukturOrganisasi::create([
+        OrganizationalStructure::create([
             'parent_id' => $pranataTerampil1->id,
             'name' => 'Nama Teknisi 1',
             'position' => 'Teknisi Laboran',
@@ -103,7 +103,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
             'order' => 1,
         ]);
 
-        StrukturOrganisasi::create([
+        OrganizationalStructure::create([
             'parent_id' => $pranataTerampil3->id,
             'name' => 'Nama Teknisi 2',
             'position' => 'Teknisi Laboran',
@@ -112,7 +112,7 @@ class VisiMisiAndStrukturSeeder extends Seeder
             'order' => 1,
         ]);
 
-        StrukturOrganisasi::create([
+        OrganizationalStructure::create([
             'parent_id' => $pranataTerampil4->id,
             'name' => 'Nama Teknisi 3',
             'position' => 'Teknisi Laboran',
